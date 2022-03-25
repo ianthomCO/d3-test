@@ -108,11 +108,11 @@ body{
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <!--<script src="https://ianthomco.github.io/2018precinct_governor.geojson" type="text/javascript"></script>-->
    <!--<script src="https://ianthomco.github.io/2018county_governor.json" type="text/javascript"></script>-->
-   <script src="https://ianthomco.github.io/testoutputfile.json" type="text/javascript"></script>
-   <script src="https://ianthomco.github.io/testoutputfile_precinct.json" type="text/javascript"></script>
-   <script src="https://ianthomco.github.io/testoutputfile_congressional.json" type="text/javascript"></script>
-   <script src="https://ianthomco.github.io/testoutputfile_statehouse.json" type="text/javascript"></script>
-   <script src="https://ianthomco.github.io/testoutputfile_statesenate.json" type="text/javascript"></script>
+   <script src="https://raw.githubusercontent.com/ianthomCO/d3-test/main/testoutputfile.json" type="text/javascript"></script>
+   <script src="https://raw.githubusercontent.com/ianthomCO/d3-test/main/testoutputfile_precinct.json" type="text/javascript"></script>
+   <script src="https://raw.githubusercontent.com/ianthomCO/d3-test/main/testoutputfile_congressional.json" type="text/javascript"></script>
+   <script src="https://raw.githubusercontent.com/ianthomCO/d3-test/main/testoutputfile_statehouse.json" type="text/javascript"></script>
+   <script src="https://raw.githubusercontent.com/ianthomCO/d3-test/main/testoutputfile_statesenate.json" type="text/javascript"></script>
    <!--<script src="https://ianthomco.github.io/2018precinct_treasurer.geojson" type="text/javascript"></script>-->
    <!--<script src="https://ianthomco.github.io/2018county_treasurer.geojson" type="text/javascript"></script>-->
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
@@ -130,7 +130,7 @@ body{
 
 <script>
 
-var maylayertest = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'	, {
+var maylayertest = L.tileLayer('https://tile.openstreetmap.org/${z}/${x}/${y}.png'	, {
 	maxZoom: 17,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 })
