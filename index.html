@@ -106,15 +106,11 @@ body{
   
    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   <!--<script src="https://ianthomco.github.io/2018precinct_governor.geojson" type="text/javascript"></script>-->
-   <!--<script src="https://ianthomco.github.io/2018county_governor.json" type="text/javascript"></script>-->
    <script src="./testoutputfile.json" type="text/javascript"></script>
    <script src="./testoutputfile_precinct.json" type="text/javascript"></script>
    <script src="./testoutputfile_congressional.json" type="text/javascript"></script>
    <script src="./testoutputfile_statehouse.json" type="text/javascript"></script>
    <script src="./testoutputfile_statesenate.json" type="text/javascript"></script>
-   <!--<script src="https://ianthomco.github.io/2018precinct_treasurer.geojson" type="text/javascript"></script>-->
-   <!--<script src="https://ianthomco.github.io/2018county_treasurer.geojson" type="text/javascript"></script>-->
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
    <style>
@@ -144,33 +140,6 @@ L.control.zoom({
      position:'bottomright'
 }).addTo(mymap);
 
-/* 
-// ADD CUSTOM GEOJSON FILE DATA
-$.getJSON("2018precinct_new.geojson",function(data){
-// L.geoJson function is used to parse geojson file and load on to map
-L.geoJson(data,{className:"PrecinctMap",style:COLORIT,zoomControl:false})
-    .addTo(mymap)
-    //.bindPopup(chart)
-  .bindTooltip(tooltipcreator_precinct, {
-    sticky: true,
-    'className': 'class-tooltip',
-    keepInView: true,
-    opacity: 0.95})
-});
-// ADD CUSTOM GEOJSON FILE DATA
-$.getJSON("2018county_new.geojson",function(data){
-// L.geoJson function is used to parse geojson file and load on to map
-L.geoJson(data,{className:"CountyMap",style:COLORIT})
-    .addTo(mymap)
-    //.bindPopup(chart)
-  .bindTooltip(tooltipcreator_county, {
-    sticky: true,
-    'className': 'class-tooltip',
-    keepInView: true,
-    opacity: 0.95})
-});
-*/
-
 var bounds = L.latLngBounds(mymap.getBounds().pad(0.001));
     mymap.setMaxBounds(bounds);
     mymap.on('drag', function() {
@@ -187,14 +156,6 @@ var gdg=L.geoJSON(precinctmapdata,{className:"PrecinctMap",style:COLORIT})
     keepInView: true,
     opacity: 0.95});
 
-/*var gdg=L.geoJSON(percinct,{className:"PrecinctMap",style:COLORITP})
-    //.bindPopup(chart)
-  .bindTooltip(tooltipcreator_precinct, {
-    sticky: true,
-    'className': 'class-tooltip',
-    keepInView: true,
-    opacity: 0.95});
-*/
 var hhh=L.geoJSON(mapdata,{className:"CountyMap",style:COLORIT})
     .addTo(mymap)
     //.bindPopup(chart)
@@ -340,36 +301,8 @@ function report(maptype){
   }
   }
   //}
- /*
-  if (maptype=="SOS"){
-    hhh=L.geoJSON(mapdata,{className:"CountyMap",style:COLORIT})
-      .bindTooltip(tooltipcreator_county, {
-        sticky: true,
-        'className': 'class-tooltip',
-        keepInView: true,
-        opacity: 0.95});
-    gdg=L.geoJSON(precinctmapdata,{className:"PrecinctMap",style:COLORIT})
-      .bindTooltip(tooltipcreator_precinct, {
-        sticky: true,
-        'className': 'class-tooltip',
-        keepInView: true,
-        opacity: 0.95});
-  }
-  if (maptype=="Treasurer"){
-    hhh=L.geoJSON(mapdata,{className:"CountyMap",style:COLORIT})
-      .bindTooltip(tooltipcreator_county, {
-        sticky: true,
-        'className': 'class-tooltip',
-        keepInView: true,
-        opacity: 0.95});
-    gdg=L.geoJSON(precinctmapdata,{className:"PrecinctMap",style:COLORIT})
-      .bindTooltip(tooltipcreator_precinct, {
-        sticky: true,
-        'className': 'class-tooltip',
-        keepInView: true,
-        opacity: 0.95});
-  }
- */
+ 
+	
   if(currentlyshowingprecincts){
         gdg.addTo(mymap)
       } 
@@ -754,78 +687,7 @@ function COLORIT(feature) {
                     color: 'black',
                     fillOpacity: 0.55
                 };
-           /*     break;
-              case 'SOS':
-                var candidates = Object.keys(feature.properties[selectedrace])
-                var index_max = 0
-                var secondmaxvalue = 0
-                
-                for (i = 1; i < Object.keys(feature.properties[selectedrace]).length-1; i++) {
-                  if (feature.properties[selectedrace][candidates[i]][0].votes > feature.properties[selectedrace][candidates[index_max]][0].votes) {
-                    secondmaxvalue = feature.properties[selectedrace][candidates[index_max]][0].votes;
-                    index_max=i;
-                  } else if (feature.properties[selectedrace][candidates[i]][0].votes > secondmaxvalue){ 
-                    secondmaxvalue = feature.properties[selectedrace][candidates[i]][0].votes;
-                  }
-                }
-                if (candidates.length>2) {
-                  var marginvictory = (feature.properties[selectedrace][candidates[index_max]][0].votes-secondmaxvalue)/feature.properties[selectedrace]["Total"][0].votes
-                } else {
-                  var marginvictory = 1;
-                }
-                var maxparty = feature.properties[selectedrace][candidates[index_max]][0].party
-                return {
-                    fillColor: getColors(maxparty,marginvictory),
-                    weight: 0.5,
-                    opacity: 0.6,
-                    color: 'black',
-                    fillOpacity: 0.55
-                };
-                break;
-            case 'Treasurer':
-                var candidates = Object.keys(feature.properties[selectedrace])
-                var index_max = 0
-                var secondmaxvalue = 0
-                
-                for (i = 1; i < Object.keys(feature.properties[selectedrace]).length-1; i++) {
-                  if (feature.properties[selectedrace][candidates[i]][0].votes > feature.properties[selectedrace][candidates[index_max]][0].votes) {
-                    secondmaxvalue = feature.properties[selectedrace][candidates[index_max]][0].votes;
-                    index_max=i;
-                  } else if (feature.properties[selectedrace][candidates[i]][0].votes > secondmaxvalue){ 
-                    secondmaxvalue = feature.properties[selectedrace][candidates[i]][0].votes;
-                  }
-                }
-                if (candidates.length>2) {
-                  var marginvictory = (feature.properties[selectedrace][candidates[index_max]][0].votes-secondmaxvalue)/feature.properties[selectedrace]["Total"][0].votes
-                } else {
-                  var marginvictory = 1;
-                }
-                var maxparty = feature.properties[selectedrace][candidates[index_max]][0].party
-                return {
-                    fillColor: getColors(maxparty,marginvictory),
-                    weight: 0.5,
-                    opacity: 0.6,
-                    color: 'black',
-                    fillOpacity: 0.55
-                };
-                break;
-            default:
-                return {
-                    fillColor: getColor(100*(feature.properties.Polis/feature.properties.Total - feature.properties.Stapleton/feature.properties.Total)),
-                    weight: 0.5,
-                    opacity: 0.6,
-                    color: 'black',
-                    fillOpacity: 0.55
-                };
-                break;
-        }
-    return {
-        fillColor: getColor(100*(feature.properties.Polis/feature.properties.Total - feature.properties.Stapleton/feature.properties.Total)),
-        weight: 0.5,
-        opacity: 0.6,
-        color: 'black',
-        fillOpacity: 0.55
-    };*/
+   
 }
 
 </script>
